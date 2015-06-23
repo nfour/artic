@@ -1,0 +1,35 @@
+<form action="<<= @settings.url >>/admin/article">
+	<table class="articlesTable">
+		<tbody>
+			<< if @articles?.length : >>
+				<< for article in @articles : >>
+					<< editUrl = @settings.url + '#!editArticle/' + article.id >>
+					<tr class="<<= odd = if odd then '' else 'odd' >>" data-id="<<= article.id >>">
+						<td class="idCell"><<= article.id >></td>
+						<td class="titleCell">
+							<a class="titleButton" href="<<= editUrl >>"><<= article.title >></a>
+						</td>
+						<td class="timeCell">
+							<<= require('moment')( article.createdAt ).fromNow() >>
+						</td>
+						<td class="buttonsCell">
+							<a
+								data-button="edit"
+								class="smallButton"
+								title="Edit this Article"
+								href="<<= editUrl >>"
+							>Edit</a>
+						</td>
+					</tr>
+				<< end >>
+			<< else : >>
+				<tr>
+					<td class="titleCell" colspan="3"><small>No Articles!</small></td>
+				</tr>
+			<< end >>
+		<tbody>
+	</table>
+</form>
+<div class="articlesPagination">
+
+</div>

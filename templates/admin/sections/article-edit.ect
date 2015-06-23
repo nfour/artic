@@ -1,0 +1,12 @@
+<< if not @article : >>
+	<h3>404</h3>
+	No Article found by that id.
+<< else : >>
+	<form class="editorForm" action="<< @settings.url >>/api/articles" method="PUT">
+		<< if @article.page : >>
+			<< include 'parts/pageEditor/editor' >>
+		<< else : >>
+			<< include 'parts/editor/editor' >>
+		<< end >>
+	</form>
+<< end >>

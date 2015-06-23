@@ -1,0 +1,17 @@
+{
+	"author"		: "nfour"
+,	"description"	: "The default theme, using ect.js"
+
+,	"bundle": {
+		"style.css"		: "style.styl"
+	,	"app.js"		: "app.coffee"
+	}
+	
+,	"templater": {
+		"ext"		: ".etc"
+	,	"options"	: {
+			"open"		: "<<"
+		,	"close"		: ">>"
+		}
+	}
+}

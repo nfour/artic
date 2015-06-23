@@ -1,0 +1,46 @@
+{
+	"name"			: "artic"
+,	"version"		: "2.2.0"
+,	"author"		: { "name": "nfour" }
+,	"description"	: "Artic. It's for articles."
+,	"repository": {
+		"type"	: "git"
+	,	"url"	: "https://github.com/nfour/artic"
+	}
+	
+,	"dependencies": {
+		"lance"				: "^2.2.0"
+	,	"ect"				: "nfour/ect"
+	,	"lactate"			: "0.13.x"
+	,	"coffee-reactify"	: "3.0.x"
+	,	"browserify"		: "^10.0.x"
+	,	"stylus"			: "0.51.x"
+	,	"uglify-js"			: "2.4.x"
+	
+	,	"bluebird"				: "^2.9.0"
+	,	"lutils"				: "^0.2.0"
+	,	"trans-interpolator"	: "^0.2.0"
+	,	"coroutiner"			: "^0.2.6"
+	,	"sqlite3"				: "^3.0.8"
+	,	"knex"					: "0.8.x"
+	,	"wrench"				: "1.5.x"
+	,	"require-directory"		: "2.x.x"
+	,	"colors"				: "^1.0.0"
+	,	"request"				: "*"
+
+	,	"moment"				: "*"
+	,	"codemirror"			: "5.2.x"
+	}
+	
+,	"devDependencies": {
+		"coffee-script"			: "^1.9.x"
+	}
+
+	
+,	"scripts": {
+		"build"		: "cake build"
+	,	"publicate"	: "npm run build && npm publish"
+	}
+
+,	"main": "./lib/app"
+}

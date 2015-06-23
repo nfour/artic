@@ -1,0 +1,51 @@
+
+box-sizing()
+	-webkit-box-sizing	: arguments
+	-moz-box-sizing		: arguments
+	box-sizing			: arguments
+
+transition()
+	-webkit-transition	: arguments
+	-moz-transition		: arguments
+	transition			: arguments
+
+table
+	border-spacing: 0
+	border-collapse: separate
+
+[data-hidden]
+	display: none
+
+	&[data-active]
+		display: block
+
+.display_block
+	&, &[data-tab-content][data-active]
+		display: block
+
+.display_inline
+	&, &[data-tab-content][data-active]
+		display: inline
+
+.display_inline-block
+	&, &[data-tab-content][data-active]
+		display: inline-block
+
+.display_table
+	&, &[data-tab-content][data-active]
+		display: table
+
+.display_table-row
+	&, &[data-tab-content][data-active]
+		display: table-row
+
+.display_table-cell
+	&, &[data-tab-content][data-active]
+		display: table-cell
+
+[data-tab-content]
+	display: none
+
+	&[data-active]
+		display: block
+

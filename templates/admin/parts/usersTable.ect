@@ -1,0 +1,78 @@
+<div class="itemsGroup nowrap flexWidth">
+	<div class="heading">Users</div>
+	<table class="prettyTable">
+		<thead>
+			<tr>
+				<td class="constrained">Created</td>
+				<td class="constrained">Id</td>
+				<td class="alignLeft">Name</td>
+				<td class="alignLeft">Slug</td>
+				<td class="alignLeft">Email</td>
+				<td class="constrained">Role</td>
+				<td class="constrained">Disabled</td>
+				<td class="constrained"></td>
+			</tr>
+		</thead>
+		<tbody>
+			<< if @users then for user in @users : >>
+				<tr>
+					<td class="constrained">
+						<small><em><<= @moment( user.createdAt ).fromNow() >></em></small>
+					</td>
+					<td class="constrained">
+						<textarea name="id" readonly><<= user.id >></textarea>
+					</td>
+					<td class="constrained">
+						<textarea
+							data-id="<<= user.id >>" name="name" 
+							data-editable readonly
+						><<= user.name >></textarea>
+					</td>
+					<td>
+						<textarea
+							data-id="<<= user.id >>" name="slug" 
+							data-editable readonly
+						><<= user.slug >></textarea>
+					</td>
+					<td>
+						<textarea
+							data-id="<<= user.id >>" name="email" 
+							data-editable readonly
+						><<= user.email >></textarea>
+					</td>
+					<td>
+						<< if user.id is 1 : >>
+							<<= user.role.id >> - <<= user.role.name >>
+						<< else : >>
+							<select readonly data-selectize name="role">
+								<< for role in @userRoles : >>
+									<option
+										<<= if role.id is user.role.id then 'selected' else '' >>
+										value="<<= role.id >>"
+									><<= role.id >> - <small><<= role.name >></small></option>
+								<< end >>
+							</select>
+						<< end >>
+					</td>
+					<td class="constrained">
+						<textarea
+							data-id="<<= user.id >>" name="disabled"
+							data-editable readonly
+						><<= user.disabled >></textarea>
+					</td>
+					<td class="constrained buttons">
+						<< if user.deletable isnt false : >>
+							<button
+								type="submit"
+								data-id="<<= user.id >>"
+								data-button="delete"
+								formmethod="DELETE"
+								class="smallButton"
+							>Delete</button>
+						<< end >>
+					</td>
+				</tr>
+			<< end >>
+		</tbody>
+	</table>
+</div>

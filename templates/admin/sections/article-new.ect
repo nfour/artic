@@ -1,0 +1,18 @@
+
+<div class="inlineTabs" data-tab-scope="newArticle">
+	<div data-tab="article" data-active>New Article</div>
+	<div data-tab="page">New Page</div>
+</div>
+<div data-tab-scope="newArticle">
+	<div data-tab-content="article" data-active>
+		<form class="editorForm" action="<< @settings.url >>/api/articles" method="POST">
+			<< include 'parts/editor/editor' >>
+		</form>
+	</div>
+	<div data-tab-content="page">
+		<form class="editorForm" action="<< @settings.url >>/api/articles" method="POST">
+			<< include 'parts/pageEditor/editor' >>
+		</form>
+	</div>
+</div>
+

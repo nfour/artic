@@ -1,0 +1,30 @@
+<div class="editorMeta">
+	<table class="prettyTable"><tbody>
+		<tr>
+			<td class="label">Tags</td>
+			<td>
+				<select placeholder="Add new or existing tags" multiple data-selectize-list name="tags" autocomplete="off">
+					<< if @article?.tags?.length then for tag in @article.tags : >>
+						<option value="<<= tag.name >>" selected><<= tag.name >></option>
+					<< end >>
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<td class="editorMetaFooter" colspan="2">
+				<input type="hidden" name="page" value="1" />
+
+				<< include 'parts/editor/switchButtons' >>
+				<div class="editorSubmitButtons floatRight" colspan="2">
+					<< if @article : >>
+						<input type="hidden" name="id" value="<<= @article.id >>" />
+						<button class="editorSubmit button button-danger" formmethod="delete">Delete Page</button>
+						<button class="editorSubmit button" formmethod="put">Update Page</button>
+					<< else : >>
+						<button class="editorSubmit button" formmethod="post">Create Page</button>
+					<< end >>
+				</div>
+			</td>
+		</tr>
+	</tbody></table>
+</div>

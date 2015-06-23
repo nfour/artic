@@ -1,0 +1,39 @@
+<form action="<<= @settings.url >>/api/categories">
+	<< include 'parts/categoriesTable' >>
+</form>
+
+<div class="clearfix"></div>
+
+<span class="button addCategoryButton" data-show=".addCategoryForm" data-hide><i class="add"></i>Add a Category</span>
+<form data-hidden class="addCategoryForm" action="<<= @settings.url >>/api/categories" method="POST">
+	<table class="prettyTable">
+		<tbody>
+			<tr>
+				<td>Name</td>
+				<td>
+					<textarea name="name"></textarea>
+				</td>
+			</tr>
+			<tr>
+				<td>Parent</td>
+				<td>
+					<select data-selectize name="parent">
+						<option value="0">-</option>
+						<< for key, category of @categories : >>
+							<option value="<<= category.id >>"><<= category.id >> - <<= category.name >></option>
+						<< end >>
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<td></td>
+				<td>
+					<div class="floatRight">
+						<button type="submit" class="button" data-button="addCategory">Add Category</button>
+						<span class="button" data-hide=".addCategoryForm" data-show=".addCategoryButton">Cancel</span>
+					</div>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</form>

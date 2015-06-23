@@ -1,0 +1,59 @@
+<div class="itemsGroup flexWidth">
+	<div class="heading">Categories</div>
+	<table class="prettyTable">
+		<thead>
+			<tr>
+				<td class="constrained">Id</td>
+				<td class="constrained">Order</td>
+				<td class="alignLeft">Name</td>
+				<td class="alignLeft">Slug</td>
+				<td class="constrained">Parent</td>
+				<td class="constrained"></td>
+			</tr>
+		</thead>
+		<tbody>
+			<< for key, item of @categories : >>
+				<tr>
+					<td class="constrained">
+						<textarea name="id" readonly><<= item.id >></textarea>
+					</td>
+					<td class="constrained">
+						<textarea
+							data-id="<<= item.id >>" name="order" 
+							data-editable readonly
+						><<- item.order >></textarea>
+					</td>
+					<td>
+						<textarea
+							data-id="<<= item.id >>" name="name" 
+							data-editable readonly
+						><<- item.name >></textarea>
+					</td>
+					<td>
+						<textarea
+							data-id="<<= item.id >>" name="slug"
+							data-editable readonly
+						><<= item.slug >></textarea>
+					</td>
+					<td class="constrained">
+						<textarea
+							data-id="<<= item.id >>" name="parent"
+							data-editable readonly
+						><<= item.parent >></textarea>
+					</td>
+					<td class="constrained buttons">
+						<< if item.deletable isnt false : >>
+							<button
+								type="submit"
+								data-id="<<= item.id >>"
+								data-button="delete"
+								formmethod="DELETE"
+								class="smallButton"
+							>Delete</button>
+						<< end >>
+					</td>
+				</tr>
+			<< end >>
+		</tbody>
+	</table>
+</div>

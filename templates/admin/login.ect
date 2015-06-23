@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Login - Admin - <<= @settings.title >></title>
+		<link media="screen" type="text/css" href="<<= @settings.url >>/static/admin/style.css" rel="stylesheet" />
+		<script src="<<= @settings.url >>/static/admin/app.js"></script>
+	</head>
+	<body class="loginPage">
+		<div class="centerer">
+			<table class="loginTable prettyTable">
+				<form action="<<= @settings.url >>/artic/api/session" method="post">
+					<tbody>
+						<tr>
+							<td class="label">Email:</td>
+							<td><input type="text" name="email" placeholder="Email" /></td>
+						</tr>
+						<tr>
+							<td class="label">Password:</td>
+							<td><input type="password" name="pass" placeholder="Password" /></td>
+						</tr>
+						<tr>
+							<td></td>
+							<td><button class="button" type="submit">Login</button></td>
+						</tr>
+					</tbody>
+				</form>
+			</table>
+
+		</div>
+		<< include 'parts/notifyPopup' >>
+	</body>
+</html>

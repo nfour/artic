@@ -1,0 +1,24 @@
+<div class="itemsGroup">
+	<div class="heading"><<= @heading[0].toUpperCase() + @heading[1..] >></div>
+	<table class="prettyTable">
+		<tbody>
+			<< for key, item of @items : >>
+				<tr>
+					<td class="info">
+						<< if item.description2 : >>
+							<i class="description2Icon">i</i>
+						<< end >>
+						<span class="name label"><<= item.name >></span>
+						<span class="description"><<= item.description >></span>
+						<< if item.description2 : >>
+							<span class="description2"><<- item.description2 >></span>
+						<< end >>
+					</td>
+					<td class="value">
+						<textarea data-id="<<= key >>" data-name="<<= key >>" name="value" data-editable readonly><<= item.value >></textarea>
+					</td>
+				</tr>
+			<< end >>
+		</tbody>
+	</table>
+</div>

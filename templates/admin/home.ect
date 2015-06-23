@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Admin - <<= @settings.title >></title>
+		<link href='http://fonts.googleapis.com/css?family=Roboto:400,300,500,700' rel='stylesheet' type='text/css'>
+		<link href='http://fonts.googleapis.com/css?family=Varela+Round' rel='stylesheet' type='text/css'>
+		<link media="screen" type="text/css" href="<<= @settings.url >>/static/admin/style.css" rel="stylesheet" />
+		<script src="<<= @settings.url >>/static/admin/app.js"></script>
+	</head>
+	<body>
+		<div class="container">
+
+			<div class="menu" data-tab-scope="menu">
+				<div class="info">
+					<h3 class="siteTitle"><a href="<<= @settings.url or '/' >>" title="Visit the website"><<= @settings.title >></a></h3><br/>
+					<span class="user"><<= @user?.name or 'User' >></span><br/>
+					<a class="logoutButton">Logout</a>
+				</div>
+<!-- 
+				<div class="tab" data-tab="dashboard">
+					<i class="i-dashboard"></i>
+					<span>Dashboard</span>
+					<span class="pointer"></span>
+				</div>
+ -->
+				<div class="tab" data-tab="pages">
+					<i class="i-dashboard"></i>
+					<span>Pages</span>
+					<span class="pointer"></span>
+				</div>
+				<div class="tab" data-tab="articles">
+					<i class="i-dashboard"></i>
+					<span>Articles</span>
+					<span class="pointer"></span>
+				</div>
+
+				<div class="tabChildren" data-tab-children="articles">
+					<div class="tab" data-tab="newArticle">
+						<i class="i-dashboard"></i>
+						<span>Create</span>
+						<span class="pointer"></span>
+					</div>
+					<div class="tab" data-tab="editArticle" data-hidden>
+						<i class="i-dashboard"></i>
+						<span>Edit</span>
+						<span class="pointer"></span>
+					</div>
+				</div>
+
+				<div class="tab" data-tab="settings">
+					<i class="i-dashboard"></i>
+					<span>Settings</span>
+					<span class="pointer"></span>
+				</div>
+
+				<div class="tabChildren" data-tab-children="settings">
+					<div class="tab" data-tab="text">
+						<i class="i-dashboard"></i>
+						<span>Text</span>
+						<span class="pointer"></span>
+					</div>
+
+					<div class="tab" data-tab="categories">
+						<i class="i-dashboard"></i>
+						<span>Categories</span>
+						<span class="pointer"></span>
+					</div>
+				</div>
+
+				<div class="tab" data-tab="users">
+					<i class="i-dashboard"></i>
+					<span>Users</span>
+					<span class="pointer"></span>
+				</div>
+				<div class="tab" data-tab="guide">
+					<i class="i-dashboard"></i>
+					<span><b>Guide</b></span>
+					<span class="pointer"></span>
+				</div>
+			</div>
+
+			<div class="core" data-tab-scope="menu">
+				<div class="dashboardPage"		data-tab-content="dashboard"></div>
+				<div class="articlesPage"		data-tab-content="articles"></div>
+				<div class="pagesPage"			data-tab-content="pages"></div>
+				<div class="newArticlePage"		data-tab-content="newArticle"><< include 'sections/article-new' >></div>
+				<div class="editArticlePage"	data-tab-content="editArticle"><< include 'sections/article-edit' >></div>
+				<div class="usersPage"			data-tab-content="users"></div>
+				<div class="settingsPage"		data-tab-content="settings"></div>
+				<div class="textPage"			data-tab-content="text"></div>
+				<div class="categoriesPage"		data-tab-content="categories"></div>
+				<div class="guidePage"			data-tab-content="guide"><< include 'sections/guide' >></div>
+			</div>
+
+		</div>
+		
+		<< include 'parts/notifyPopup' >>
+	</body>
+</html>

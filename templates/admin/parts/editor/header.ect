@@ -1,0 +1,18 @@
+<div class="editorHeader">
+	<input
+		class="editorTitle clearfix"
+		name="title"
+		placeholder="<title>"
+		data-clone=".generatedSlug"
+		data-event="generateSlug"
+		autocomplete="off"
+		value="<<= @article?.title >>"
+	/>
+	<div class="editorHeaderMeta">
+		<< if @article : >>
+			Created <em class="metaTime"><<= require('moment')( @article?.createdAt ).fromNow() >></em>
+			 by <strong class="metaAuthor"><<= @article?.author?.name >></strong>.
+		<< end >>
+		<!-- Generated URL: <span class="metaGeneratedUrl"><<= @settings.url >>/article/<span class="generatedSlug"></span></span> -->
+	</div>
+</div>

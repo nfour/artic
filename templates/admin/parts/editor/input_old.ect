@@ -1,0 +1,76 @@
+
+<<
+	inputs = [
+		{
+			key: 'title'
+			classes: 'minimalHeight'
+		}
+		{
+			key: 'body'
+			classes: ''
+		}
+		{
+			key: 'bodyExtra'
+			classes: 'minimalHeight'
+		}
+
+		{
+			key: 'sideImage'
+			classes: 'minimalHeight monospaced'
+		}
+		{
+			key: 'headTitle'
+			classes: 'minimalHeight'
+			markdown: false
+		}
+		{
+			key: 'headDescription'
+			classes: 'minimalHeight'
+			markdown: false
+		}
+	]
+>>
+
+<< for input, index in inputs : >>
+	<<
+		key = input.key
+		
+		if @article
+			for _key, data of ( @article?.data.blocks or {} )
+				if data?.index is index
+					key = _key
+					break
+
+	>>
+	<< if input.markdown is false : >>
+		<div class="input <<= input.classes >>">
+			<input readonly name="data.blocks[<<= index >>].key" value="<<= key >>" />
+			<textarea
+				name="blocks" 
+				autocomplete="off"
+				class="autoHeight"
+				data-code-mirror
+			><<- @article?.blocks[ index ] >></textarea>
+		</div>
+	<< else : >>
+		<div class="row" data-markdown-scope="blocks[<<= index >>]">
+			<div class="col input <<= input.classes >>">
+				<input readonly name="data.blocks[<<= index >>].key" value="<<= key >>" />
+				<textarea
+					name="blocksMd" 
+					data-markdown="blocks[<<= index >>]" 
+					data-markdown-attr="html" 
+					autocomplete="off"
+					class="autoHeight"
+				><<- @article?.blocksMd[ index ] >></textarea>
+			</div>
+			<div class="col output">
+				<div data-markdown-output="blocks[<<= index >>]"></div>
+				<textarea
+					name="blocks" data-hidden type="hidden" data-markdown-output="blocks[<<= index >>]"
+				><<- @article?.blocks[ index ] >></textarea>
+			</div>
+		</div>
+	<< end >>
+
+<< end >>

@@ -1,0 +1,54 @@
+<form action="<<= @settings.url >>/api/users">
+	<< include 'parts/usersTable' >>
+</form>
+
+<div class="clearfix"></div>
+
+<span class="button addUserButton" data-show=".addUserForm" data-hide><i class="add"></i>Add a User</span>
+<form data-hidden class="addUserForm" action="<<= @settings.url >>/api/users" method="POST">
+	<table class="prettyTable">
+		<tbody>
+			<tr>
+				<td>Name</td>
+				<td>
+					<textarea name="name"></textarea>
+				</td>
+			</tr>
+			<tr>
+				<td>Email</td>
+				<td>
+					<textarea name="email"></textarea>
+				</td>
+			</tr>
+			<tr>
+				<td>Pass</td>
+				<td>
+					<textarea name="pass"></textarea>
+				</td>
+			</tr>
+			<tr>
+				<td>Role</td>
+				<td>
+					<select data-selectize name="role">
+						<< defaultRole = @userRoles.length >>
+						<< for role in @userRoles : >>
+							<option
+								<<= if role.id is defaultRole then 'selected' else '' >>
+								value="<<= role.id >>"
+							><<= role.id >> - <small><<= role.name >></small></option>
+						<< end >>
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<td></td>
+				<td>
+					<div class="floatRight">
+						<button type="submit" class="button" data-button="addUser">Add User</button>
+						<span class="button" data-hide=".addUserForm" data-show=".addUserButton">Cancel</span>
+					</div>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</form>

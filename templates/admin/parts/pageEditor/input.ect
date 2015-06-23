@@ -1,0 +1,128 @@
+
+<div class="block skeleton skeleton-textBlock input">
+	<input class="keyInput" name="" value="" />
+	<input type="hidden" class="typeInput" name="" value="text" />
+	<textarea
+		class="blockInput"
+		name="" 
+		autocomplete="off"
+		class="autoHeight"
+	></textarea>
+</div>
+
+<div class="row block skeleton skeleton-mdBlock" data-markdown-scope="">
+	<div class="col input">
+		<input class="keyInput" name="" value="" />
+		<input type="hidden" class="typeInput" name="" value="md" />
+		<textarea
+			class="blockInput"
+			name="" 
+			data-markdown="" 
+			data-markdown-attr="html" 
+			autocomplete="off"
+			class="autoHeight"
+		></textarea>
+	</div>
+	<div class="col output">
+		<div class="blockOutput" data-markdown-output=""></div>
+		<textarea
+			class="blockOutput"
+			name="" data-hidden type="hidden" data-markdown-output=""
+		></textarea>
+	</div>
+</div>
+
+
+<< if @article : >>
+	<< for meta, index in @article.data.blocks : >>
+		<< key = meta.key >>
+		<< if meta.type is 'text' : >>
+			<div class="block input">
+				<input class="keyInput" name="data.blocks[<<= meta.index >>].key" value="<<= key >>" />
+				<input type="hidden" name="data.blocks[<<= meta.index >>].type" value="text" />
+				<textarea
+					name="blocks[<<= meta.index >>]" 
+					autocomplete="off"
+					data-code-mirror
+					class="autoHeight"
+				><<- @article.block key >></textarea>
+			</div>
+		<< else : >>
+			<div class="block row" data-markdown-scope="blocks[<<= meta.index >>]">
+				<div class="col input">
+					<input class="keyInput" name="data.blocks[<<= meta.index >>].key" value="<<= key >>" />
+					<input type="hidden" name="data.blocks[<<= meta.index >>].type" value="md" />
+					<textarea
+						name="blocksMd[<<= meta.index >>]" 
+						data-markdown="blocks[<<= meta.index >>]" 
+						data-markdown-attr="html" 
+						autocomplete="off"
+						class="autoHeight"
+					><<- @article.block.markdown key >></textarea>
+				</div>
+				<div class="col output">
+					<div data-markdown-output="blocks[<<= meta.index >>]"></div>
+					<textarea
+						name="blocks[<<= meta.index >>]" data-hidden type="hidden" data-markdown-output="blocks[<<= meta.index >>]"
+					><<- @article.block key >></textarea>
+				</div>
+			</div>
+		<< end >>
+	<< end >>
+<< else : >>
+	<<
+		inputs = [
+			{
+				key: 'headTitle'
+				classes: 'minimalHeight'
+			}
+			{
+				key: 'headDescription'
+				classes: 'minimalHeight'
+			}
+		]
+	>>
+
+	<< for input, index in inputs : >>
+		<<
+			key = input.key
+		>>
+		<< if input.markdown is false : >>
+			<div class="block input">
+				<input class="keyInput" name="data.blocks[<<= index >>].key" value="<<= key >>" />
+				<input type="hidden" name="data.blocks[<<= index >>].type" value="text" />
+				<textarea
+					name="blocks[<<= index >>]" 
+					autocomplete="off"
+					data-code-mirror
+					class="autoHeight"
+				></textarea>
+			</div>
+		<< else : >>
+			<div class="block row" data-markdown-scope="blocks[<<= index >>]">
+				<div class="col input">
+					<input class="keyInput" name="data.blocks[<<= index >>].key" value="<<= key >>" />
+					<input type="hidden" name="data.blocks[<<= index >>].type" value="md" />
+					<textarea
+						name="blocksMd[<<= index >>]" 
+						data-markdown="blocks[<<= index >>]" 
+						data-markdown-attr="html" 
+						autocomplete="off"
+						class="autoHeight"
+					></textarea>
+				</div>
+				<div class="col output">
+					<div data-markdown-output="blocks[<<= index >>]"></div>
+					<textarea
+						name="blocks[<<= index >>]" data-hidden type="hidden" data-markdown-output="blocks[<<= index >>]"
+					></textarea>
+				</div>
+			</div>
+		<< end >>
+
+	<< end >>
+<< end >>
+
+<div class="inputControls row">
+	<a class="col button addMdBlock">+ Markdown Block</a><a class="col button addTextBlock">+ Text Block</a>
+</div>

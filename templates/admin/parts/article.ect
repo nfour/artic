@@ -1,0 +1,13 @@
+<h2 class="title"><<= @article?.title >></h2>
+<div class="body">
+	<table class="prettyTable"><tbody>
+		<< if @article then for meta in @article?.data?.blocks : >>
+			<tr>
+				<td class="label"><<= meta.key >></td>
+				<td>
+					<<- @article.block meta.key >>
+				</td>
+			</tr>
+		<< end >>
+	</table>
+</div>

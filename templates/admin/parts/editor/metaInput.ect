@@ -1,0 +1,59 @@
+<div class="editorMeta">
+	<table class="prettyTable"><tbody>
+		<tr>
+			<td class="label">Publish Date</td>
+			<td>
+				<input
+					readonly
+					class="datePicker datePicker-plubishDate"
+					placeholder="... Now ..."
+					value="<<= if @article?.publishedAt then @moment( @article.publishedAt ).format('YYYY/MM/DD HH:mm') else '' >>"
+				/>
+				<input name="publishedAt" type="hidden" value="<<= @article?.publishedAt >>" />
+			</td>
+		</tr>
+		<tr>
+			<td class="label">Categories</td>
+			<td>
+				<select data-selectize multiple name="categories" autocomplete="off">
+					<< if @categories then for key, category of @categories : >>
+						<< if ( not @article and category.id is 1 ) or ( @article and @article.categoriesById and category.id of @article.categoriesById ) : >>
+							<option value="<<= category.id >>" selected><<= category.name >></option>
+						<< else : >>
+							<option value="<<= category.id >>"><<= category.name >></option>
+						<< end >>
+					<< end >>
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<td class="label">Tags</td>
+			<td>
+				<select placeholder="Add new or existing tags" multiple data-selectize-list name="tags" autocomplete="off">
+					<< if @article?.tags?.length then for tag in @article.tags : >>
+						<option value="<<= tag.name >>" selected><<= tag.name >></option>
+					<< end >>
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<td class="editorMetaFooter" colspan="2">
+				<< if @article?.page : >>
+					<input type="hidden" name="page" value="1" />
+				<< end >>
+				<< include 'parts/editor/switchButtons' >>
+				<div class="editorSubmitButtons floatRight" colspan="2">
+					<< if @article : >>
+						<input type="hidden" name="id" value="<<= @article.id >>" />
+						<button class="editorSubmit button button-danger" formmethod="delete">Delete Article</button>
+						<button class="editorSubmit button" formmethod="put">Update Article</button>
+					<< else : >>
+						<button class="editorSubmit button" formmethod="post">Create Article</button>
+					<< end >>
+				</div>
+			</td>
+		</tr>
+	</tbody></table>
+
+
+</div>

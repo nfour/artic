@@ -1,0 +1,33 @@
+
+<div class="editorSwitchButtons">
+	<span
+		class="smallButton switchButton"
+		<<= if @article?.published then 'data-active' else '' >>
+		data-switch="[name='published']"
+	>Published</span>
+	<input
+		type="hidden" name="published"
+		value="<<= if not @article then 0 else if @article.published then 1 else 0 >>"
+	/>
+
+	<span
+		class="smallButton switchButton"
+		<<= if @article?.private then 'data-active' else '' >>
+		data-switch="[name='private']"
+		title=""
+	>Private</span>
+	<input
+		type="hidden" name="private"
+		value="<<= if not @article then 0 else if @article.private then 1 else 0 >>"
+	/>
+
+	<span
+		class="smallButton switchButton"
+		<<= if @article?.disabled then 'data-active' else '' >>
+		data-switch="[name='disabled']"
+	>Disabled</span>
+	<input
+		type="hidden" name="disabled"
+		value="<<= if not @article then 0 else if @article.disabled then 1 else 0 >>"
+	/>
+</div>
