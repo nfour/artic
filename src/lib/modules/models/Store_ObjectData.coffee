@@ -1,13 +1,14 @@
+###
+	Store Base.ObjectData base class.
+	Stores data in a hashtable object.
+	
+	@version 0.2.0
+###
+
 Store = require './Store'
 
 { merge, clone, typeOf } = require 'lutils'
 
-###
-	Store Base.ObjectData base class.
-	Hashtable data structure stored as JSON.
-	
-	@version 0.1.0
-###
 module.exports = class ObjectData extends Store
 	constructor: ->
 		@saveData =

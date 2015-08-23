@@ -2,10 +2,11 @@
 <html>
 	<head>
 		<title>Admin - <<= @settings.title >></title>
+		<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,500,700' rel='stylesheet' type='text/css'>
 		<link href='http://fonts.googleapis.com/css?family=Roboto:400,300,500,700' rel='stylesheet' type='text/css'>
 		<link href='http://fonts.googleapis.com/css?family=Varela+Round' rel='stylesheet' type='text/css'>
-		<link media="screen" type="text/css" href="<<= @settings.url >>/static/admin/style.css" rel="stylesheet" />
-		<script src="<<= @settings.url >>/static/admin/app.js"></script>
+		<link media="screen" type="text/css" href="/static/admin/style.css" rel="stylesheet" />
+		<script src="/static/admin/app.js"></script>
 	</head>
 	<body>
 		<div class="container">
@@ -72,11 +73,6 @@
 					<span>Users</span>
 					<span class="pointer"></span>
 				</div>
-				<div class="tab" data-tab="guide">
-					<i class="i-dashboard"></i>
-					<span><b>Guide</b></span>
-					<span class="pointer"></span>
-				</div>
 			</div>
 
 			<div class="core" data-tab-scope="menu">
@@ -89,7 +85,6 @@
 				<div class="settingsPage"		data-tab-content="settings"></div>
 				<div class="textPage"			data-tab-content="text"></div>
 				<div class="categoriesPage"		data-tab-content="categories"></div>
-				<div class="guidePage"			data-tab-content="guide"><< include 'sections/guide' >></div>
 			</div>
 
 		</div>

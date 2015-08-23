@@ -1,11 +1,11 @@
-<form action="<<= @settings.url >>/api/users">
+<form action="/artic/api/users">
 	<< include 'parts/usersTable' >>
 </form>
 
 <div class="clearfix"></div>
 
 <span class="button addUserButton" data-show=".addUserForm" data-hide><i class="add"></i>Add a User</span>
-<form data-hidden class="addUserForm" action="<<= @settings.url >>/api/users" method="POST">
+<form data-hidden class="addUserForm" action="/artic/api/users" method="POST">
 	<table class="prettyTable">
 		<tbody>
 			<tr>

@@ -1,11 +1,11 @@
-<form action="<<= @settings.url >>/api/categories">
+<form action="/artic/api/categories">
 	<< include 'parts/categoriesTable' >>
 </form>
 
 <div class="clearfix"></div>
 
 <span class="button addCategoryButton" data-show=".addCategoryForm" data-hide><i class="add"></i>Add a Category</span>
-<form data-hidden class="addCategoryForm" action="<<= @settings.url >>/api/categories" method="POST">
+<form data-hidden class="addCategoryForm" action="/artic/api/categories" method="POST">
 	<table class="prettyTable">
 		<tbody>
 			<tr>

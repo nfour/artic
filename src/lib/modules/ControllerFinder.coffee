@@ -1,3 +1,14 @@
+###
+	Controller Finder.
+	Searches a nested object structures for properties matching
+	a set of keys (as derived from a url), finally calling a controller.
+	
+	Searches wich keys end up resolving to either a Function
+	or instance of RestController are accepted.
+
+	@version 0.1.0
+###
+
 RestController = require './RestController'
 
 { typeOf } = require 'lutils'

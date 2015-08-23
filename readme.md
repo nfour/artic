@@ -1,5 +1,5 @@
 # Artic
-Artic is a CMS for **Artic**les.
+Artic is a CMS for **Artic**les, in node_modules form.
 
 **Status**: `[ ! UNSTABLE CONCOCTION ! ]`
 

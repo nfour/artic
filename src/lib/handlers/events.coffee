@@ -3,26 +3,6 @@ A = require '../app'
 { merge, clone } = A.utils
 
 module.exports = ->
-	A.lance.on 'serveTemplate', (o) ->
-		data = merge.black o.template.data, A.locals
-
-		mergeData	= {}
-		keys		= [ 'settings', 'text' ]
-
-		#if data.article
-		#	keys.push 'article'
-
-		#mergeData[ key ] = data[ key ] for key in keys
-			
-		#A.helpers.interpolate.all data, mergeData
-
-		# todo: to make this work, iterate over all the articles and individually choose which fields will be interpolated
-
-		#if data.articles
-		#	for article in data.articles
-		#		mergeData.article = article
-		#		A.helpers.interpolate.all article, mergeData
-
 	#
 	# Decorations
 	#

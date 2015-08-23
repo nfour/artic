@@ -1,20 +1,21 @@
+###
+	Database controller class for psuedo-Knex models.
+	
+	@version 0.3.0
+###
+
 Promise	= require 'bluebird'
 Emitter	= require('events').EventEmitter
 Knex	= require 'knex'
 
 { merge, clone, typeOf } = require 'lutils'
 
-###
-	Database controller class for psuedo-Knex models.
-	
-	@version 0.1.0
-###
 module.exports = class Database extends Emitter
 	###
 		The config is passed directly to Knex and
 		any extra properties are used by the instance.
 	
-		@cfg =
+		@param cfg {Object}
 			resetSchema	: false
 			resetStores	: true
 			
@@ -74,7 +75,9 @@ module.exports = class Database extends Emitter
 		self = this
 		
 		NewClass = class extends Class
-			constructor: (@db = self) -> super
+			constructor: ->
+				@db = self
+				super
 	
 		return (args...) -> new NewClass args...
 		

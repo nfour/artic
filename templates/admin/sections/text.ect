@@ -1,4 +1,4 @@
-<form action="<<= @settings.url >>/api/text">
+<form action="/artic/api/text">
 	<< if @itemsByGroup then for groupName, items of @itemsByGroup : >>
 		<< include 'parts/editableGroup', { items, heading: groupName } >>
 	<< end >>

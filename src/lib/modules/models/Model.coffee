@@ -1,26 +1,31 @@
+###
+	A knex-based Model base class.
+	
+	`@db` is a Knex() connection. It can be passed
+	as the first argument or bound another way (as with Database).
+
+	@version 0.6.1
+###
+
 Promise	= require 'bluebird'
 Emitter	= require('events').EventEmitter
 
 { merge, clone, typeOf, format } = require 'lance/utils'
 
-###
-	A knex-based Model base class.
-	
-	@db is a Knex() instance.
-	@table is Knex()('tableName')
-
-	@version 0.2.0
-###
 module.exports = class Model extends Emitter
 	validators: {}
 	
-	constructor	: ->
+	constructor: (args...) ->
 		super
 		
-		@table		= @db.knex @tableName
-		@validated	= false
+		if args.length > 1
+			@db = args[0]
+		
+		# The last argument are options
+		o = args[ args.length - 1 ]
 
-		@o = @params =
+		predefined = @o or @params or {}
+		@o = @params = merge.black predefined,
 			wheres	: []
 			columns	: []
 			knex	: []
@@ -29,9 +34,13 @@ module.exports = class Model extends Emitter
 			update	: false
 			delete	: false
 			insert	: false
-			options	: {}
 	
-
+		merge @o, o if o
+		
+		@table		= @db.knex @tableName
+		@validated	= false
+		
+	
 	# Used but deprecated, need to rewrite knex models
 	rawEscape: (item, bindings) ->
 		if typeOf.Array item
@@ -75,11 +84,11 @@ module.exports = class Model extends Emitter
 	insert: (rows) ->
 		rows ?= @o.fields
 		rows = @castInput rows
-
-		return [] if not rows.length
 		
 		yield @formatInput rows
 		yield @validate rows
+		
+		return [] if not rows.length
 		
 		#console.log 'insert'.yellow, JSON.stringify rows, null, 4
 		
@@ -100,7 +109,6 @@ module.exports = class Model extends Emitter
 
 	formatInput: (rows) ->
 		for fields in rows
-			delete fields.id if fields.id?
 			format.jsonify fields
 
 		yield return rows
@@ -153,7 +161,7 @@ module.exports = class Model extends Emitter
 		@return rows {Array or Object} Same format as input
 	###
 	validate: (rows) ->
-		return rows if @validated or not @validation
+		return rows if not @validation
 		
 		rows = @castInput rows
 
@@ -161,7 +169,6 @@ module.exports = class Model extends Emitter
 			invalids = []
 
 			for field of row when field not of @validation
-				invalids.push { row, field, reason: 'Not whitelisted' }
 				delete row[ field ]
 
 			for field, validator of @validation when field of row and validator?
@@ -170,9 +177,9 @@ module.exports = class Model extends Emitter
 				switch
 					when validator is true or validator is false
 						if ( !! value ) isnt validator
-							invalids.push { row, field, reason: "Expected #{ validator.toString() }y value" }
-					else
-						yield validator value, field, row
+							invalids.push { row, field, reason: "Expected #{ validator.toString() }-like value" }
+					when typeOf.Function validator
+						yield validator.apply this, [ value, field, row ]
 						.then (value) =>
 							row[ field ] = value
 						.catch (err) =>
@@ -185,8 +192,6 @@ module.exports = class Model extends Emitter
 					@emit 'invalid', invalid
 					rows.splice index, 1
 					
-		@validated = true
-
 		yield return if rows is arguments[0] then rows else rows[0]
 	
 	require('coroutiner') @prototype

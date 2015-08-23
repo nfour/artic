@@ -1,6 +1,6 @@
 {
 	"name"			: "artic"
-,	"version"		: "2.2.0"
+,	"version"		: "2.2.5"
 ,	"author"		: { "name": "nfour" }
 ,	"description"	: "Artic. It's for articles."
 ,	"repository": {
@@ -9,7 +9,7 @@
 	}
 	
 ,	"dependencies": {
-		"lance"				: "^2.2.0"
+		"lance"				: "2.10.x"
 	,	"ect"				: "nfour/ect"
 	,	"lactate"			: "0.13.x"
 	,	"coffee-reactify"	: "3.0.x"

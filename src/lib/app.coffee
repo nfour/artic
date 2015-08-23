@@ -1,15 +1,8 @@
-path		= require 'path'
-requireDir	= require 'require-directory'
-Promise		= require 'bluebird'
-Lance		= require 'lance'
-Emitter		= require('events').EventEmitter
-require 'colors'
-
 ###
 	Artic
 	
-	A singleton function which constructs artic and binds the app together.
-	The entire ./lib/* directory is attatched to this singleton.
+	This is the base file which glues everything together.
+	The entire ./lib/* directory is attatched to this exported function.
 	
 	A.initialize() then initializes artic with a database, templating and lance/server.
 	
@@ -55,8 +48,17 @@ require 'colors'
 		This should all *idealy* be overridable by the user's own directory structure on
 		a file by file basis. Currently is it workable but unfinished.
 ###
+
+path		= require 'path'
+requireDir	= require 'require-directory'
+Promise		= require 'bluebird'
+Lance		= require 'lance'
+Emitter		= require('events').EventEmitter
+require 'colors'
+
 module.exports = A = (cfg) ->
 	Emitter.call A
+	
 		
 	merge A.cfg, cfg if cfg
 	

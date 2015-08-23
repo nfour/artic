@@ -1,20 +1,27 @@
+###
+	Store base class.
+	Stores are in-memory data stores for high-performance reads.
+	
+	Use stores when data should be read from and written to often.
+	By default, persistant via the @db.Stores() model.
+	
+	`@db` is a Knex() connection. It can be passed
+	as the first argument or bound another way (as with Database).
+	
+	@version 0.2.0
+###
+
 fs		= require 'fs'
 path	= require 'path'
 Emitter	= require('events').EventEmitter
 
 { merge, clone, typeOf } = require 'lutils'
 
-
-###
-	Store base class.
-	Stores are in-memory data stores for high-performance reads.
-	By default persistant to @db.Stores() model.
-	
-	@version 0.1.0
-###
 module.exports = class Store extends Emitter
-	constructor: ->
+	constructor: (db) ->
 		super
+		
+		@db or @db = db
 		
 		@values = if @valueKey then {} else @data
 

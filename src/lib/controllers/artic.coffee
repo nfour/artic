@@ -18,8 +18,8 @@ merge controller,
 	login: (o) ->
 		{ template, session } = o
 
-		template.view		= 'login'
-		console.log A.templater.cfg.root
+		template.view = 'login'
+
 		yield return
 
 	articles: (o) ->

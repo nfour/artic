@@ -1,13 +1,14 @@
+###
+	Store Base.ArrayData base class.
+	Stores data as rows in an array.
+	
+	@version 0.2.0
+###
+
 Store = require './Store'
 
 { merge, clone, typeOf } = require 'lutils'
 
-###
-	Store Base.ArrayData base class.
-	Array data structure stored as JSON.
-	
-	@version 0.1.0
-###
 module.exports = class ArrayData extends Store
 	constructor: ->
 		@saveData =

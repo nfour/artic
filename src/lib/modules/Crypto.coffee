@@ -1,10 +1,14 @@
+###
+	Crypto.
+	For encrypting, ciphering with a simple syntax and default algo's.
+	
+	@version 0.1.0
+###
+
 crypto = require 'crypto'
 
 { merge, clone } = require 'lutils'
 
-###
-	A class to help encryption of things like passwords and other user data
-###
 module.exports = class Crypto
 	constructor: (cfg) ->
 		@cfg =

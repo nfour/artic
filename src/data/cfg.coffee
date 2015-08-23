@@ -26,7 +26,7 @@ module.exports =
 				errors: true
 			
 	database:
-		resetSchema	: true
+		resetSchema	: false
 		resetStores	: true
 		resetDelay	: 30
 		

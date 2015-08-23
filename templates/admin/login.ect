@@ -2,13 +2,15 @@
 <html>
 	<head>
 		<title>Login - Admin - <<= @settings.title >></title>
-		<link media="screen" type="text/css" href="<<= @settings.url >>/static/admin/style.css" rel="stylesheet" />
-		<script src="<<= @settings.url >>/static/admin/app.js"></script>
+		<link href='http://fonts.googleapis.com/css?family=Roboto:400,300,500,700' rel='stylesheet' type='text/css'>
+		<link href='http://fonts.googleapis.com/css?family=Varela+Round' rel='stylesheet' type='text/css'>
+		<link media="screen" type="text/css" href="/static/admin/style.css" rel="stylesheet" />
+		<script src="/static/admin/app.js"></script>
 	</head>
 	<body class="loginPage">
 		<div class="centerer">
 			<table class="loginTable prettyTable">
-				<form action="<<= @settings.url >>/artic/api/session" method="post">
+				<form action="/artic/api/session" method="post">
 					<tbody>
 						<tr>
 							<td class="label">Email:</td>

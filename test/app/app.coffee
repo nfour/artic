@@ -14,6 +14,7 @@ artic = Artic {
 		
 	lance:
 		server:
+			port	: 1337
 			static	: './static'
 			
 		root	: __dirname
@@ -21,12 +22,7 @@ artic = Artic {
 		
 		templater:
 			ext: '.etc'
-
-
 }
-
-
-
 
 artic.initialize().then ->
 	#console.log artic.templater.cfg
@@ -37,4 +33,3 @@ artic.initialize().then ->
 		console.log '404 route manual'
 		o.serve { view: 'home' }
 	]
-	

@@ -16,16 +16,16 @@ module.exports = class Articles extends A.modules.models.Model
 		blocksMd	: true
 		
 		author: (author, fields) ->
-			if not user = yield A.Users().where({ id: author }).selectOne()
+			if not user = yield @db.Users().where({ id: author }).selectOne()
 				throw 'Invalid author'
 
 			yield return user.id
 			
 		data		: true
-		disabled	: true
-		private		: true
-		published	: true
-		page		: true
+		disabled	: null
+		private		: null
+		published	: null
+		page		: null
 
 	# Used to determine when to cast as a bool
 	booleanFields:

@@ -9,6 +9,26 @@ A.coroutiner module.exports = routers =
 		
 		yield return o.next()
 
+	login: (o) ->
+		console.log 'route:login'.yellow
+		{ session, template } = o
+		
+		template.templater = A.adminTemplater
+
+		try
+			yield session.auth()
+		catch err
+			session.destroy()
+			return o.serveRedirect '/admin/login'
+
+		try
+			yield A.controllers.admin.login o
+		catch err
+			return routers.error o, err
+		
+		o.serve()
+		yield return
+
 	###
 		Finds a controller in ./controllers/api/
 	###
@@ -63,28 +83,6 @@ A.coroutiner module.exports = routers =
 		
 		yield return o.serve()
 
-	###
-		Handles bubbled up errors consistantly
-	###
-	error: (o, err) ->
-		console.log 'route:error'.yellow
-		if o.template.view
-			o.template.view = 'pages/error'
-			A.lance.emit 'error', err, "route #{ o.route.name }" # temporary debugging
-		else
-			# reset the json for security
-			o.json = {}
-
-			if err instanceof Error
-				o.json.error = 'Internal Error'
-			else
-				o.json.error = err
-
-		if err instanceof Error
-			A.lance.emit 'error', err, "route #{ o.route.name }"
-
-		yield return o.serve()
-
 	404: (o) ->
 		console.log 'route:404'.yellow
 		yield return o.serveHttpCode 404
@@ -121,22 +119,25 @@ A.coroutiner module.exports = routers =
 
 		yield return
 
-	login: (o) ->
-		console.log 'route:login'.yellow
-		{ session, template } = o
-		
-		template.templater = A.adminTemplater
 
-		try
-			yield session.auth()
-		catch err
-			session.destroy()
-			return o.serveRedirect '/admin/login'
+	###
+		Handles bubbled up errors consistantly
+	###
+	error: (o, err) ->
+		console.log 'route:error'.yellow
+		if o.template.view
+			o.template.view = 'pages/error'
+			A.lance.emit 'error', err, "route #{ o.route.name }" # temporary debugging
+		else
+			# reset the json for security
+			o.json = {}
 
-		try
-			yield A.controllers.admin.login o
-		catch err
-			return routers.error o, err
-		
-		o.serve()
-		yield return
+			if err instanceof Error
+				o.json.error = 'Internal Error'
+			else
+				o.json.error = err
+
+		if err instanceof Error
+			A.lance.emit 'error', err, "route #{ o.route.name }"
+
+		yield return o.serve()

@@ -278,7 +278,7 @@ $(document).ready ->
 				if err or json?.error
 					return errorPopup err or json?.error
 
-				window.location.pathname = '/admin' # todo: test
+				window.location.pathname = '/artic' # todo: test
 
 	if ( $categoriesPage = $ '.categoriesPage' ).length
 		$categoriesPage.on 'click', '[data-button="addCategory"]',(event) ->
@@ -330,9 +330,9 @@ $(document).ready ->
 
 	$('.logoutButton').on 'click', ->
 		A.request.delete {
-			url: '/api/session'
+			url: '/artic/api/session'
 		}, (err, json) ->
-			window.location = '/admin'
+			window.location = '/artic'
 
 	$('body').on 'click', '.editor .addMdBlock', ->
 		$button		= $ this

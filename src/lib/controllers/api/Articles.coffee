@@ -29,16 +29,25 @@ module.exports = class Articles extends A.modules.RestController
 
 		oldArticle = yield Model()
 			.where { slug: fields.slug }
-			.column 'articles.id'
 			.selectOne { private: true, disabled: true, raw: true }
 
 		if oldArticle?.id
 			throw "An article with the title slug `#{fields.slug}` already exists"
 
 		fields.author = user.id
-
-		insertedIds = yield Model().insert fields
-
+		
+		invalids = {}
+		insertedIds = yield Model()
+			.on 'invalid', ({ row, field, reason, type }) -> invalids[ field ] = reason
+			.insert fields
+			
+		if Object.keys( invalids ).length
+			json.error = "Invalid fields"
+			json.invalid = invalids
+			json.fields = fields
+			
+			return null
+		
 		if not articleId = insertedIds[0]
 			throw 'Failed to commit article to database'
 

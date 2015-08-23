@@ -9,10 +9,6 @@ module.exports = [
 	# Admin area
 	[ 'GET',	'/artic/:controller(*)?',			routers.admin ]
 	
-	# Public
-	#[ 'GET',	'/page/:title',	routers.paging ]
-	#[ 'GET',	'/article/:title',	routers.article ]
-	
 	[ '*',		'/*',								routers['404'] ]
 
 ]
